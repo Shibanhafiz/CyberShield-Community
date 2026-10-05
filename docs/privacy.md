@@ -5,9 +5,14 @@
 1. **Collect minimum**: category, type, sanitized content, coarse area,
    optional description. No names, phones, emails, addresses, coordinates,
    device data or accounts.
-2. **Redact before storage**: OTPs, phone numbers, emails, card-like
-   numbers masked via `services/redaction.py` (+ ML-side equivalent).
-   Users are warned in the UI to strip secrets themselves first.
+2. **Redact before storage**: OTPs/PINs (4–8 digits), phone numbers,
+   emails, card-like numbers (13–19 digits), CVVs (`cvv` + 3–4 digits),
+   password values (`password:`/`=` + value) and token values
+   (`token=`/`sessionid=`/`apikey=` + value) masked via
+   `services/redaction.py` (+ ML-side equivalent in `ml/src/preprocess.py`,
+   kept in agreement by test). Context patterns require an explicit label
+   and delimiter, so ordinary prose is never mangled. Users are warned in
+   the UI to strip secrets themselves first.
 3. **Never log secrets**: logs carry masked previews (≤120 chars) + lengths.
    Covered by regression test (`test_5c_secrets_not_logged`).
 4. **Analysis is stateless**: `analysis_records` stores outcome metadata
