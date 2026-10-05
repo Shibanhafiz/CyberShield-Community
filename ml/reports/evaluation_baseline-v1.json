@@ -1,0 +1,9 @@
+{
+  "model_version": "baseline-v1",
+  "test_size": 20,
+  "accuracy": 0.65,
+  "precision_macro": 0.6667,
+  "recall_macro": 0.65,
+  "f1_macro": 0.63,
+  "f1_weighted": 0.63
+}

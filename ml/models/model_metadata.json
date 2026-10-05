@@ -1,0 +1,53 @@
+{
+  "model_version": "baseline-v1",
+  "model_type": "TfidfVectorizer + LogisticRegression (sklearn Pipeline)",
+  "dataset_file": "dev_dataset_v1.csv",
+  "dataset_size": 100,
+  "data_source": "DEVELOPMENT DATA — small hand-written set for pipeline validation only, NOT representative of real-world traffic",
+  "classes": [
+    "NORMAL",
+    "PHISHING",
+    "BANKING_SCAM",
+    "JOB_SCAM",
+    "INVESTMENT_SCAM",
+    "DELIVERY_SCAM",
+    "OTP_SCAM",
+    "DIGITAL_ARREST",
+    "FAKE_SUPPORT",
+    "OTHER_SCAM"
+  ],
+  "class_distribution": {
+    "BANKING_SCAM": 10,
+    "DELIVERY_SCAM": 10,
+    "DIGITAL_ARREST": 10,
+    "FAKE_SUPPORT": 10,
+    "INVESTMENT_SCAM": 10,
+    "JOB_SCAM": 10,
+    "NORMAL": 10,
+    "OTHER_SCAM": 10,
+    "OTP_SCAM": 10,
+    "PHISHING": 10
+  },
+  "train_size": 80,
+  "test_size": 20,
+  "test_size_ratio": 0.2,
+  "random_state": 42,
+  "class_weight": "balanced",
+  "tfidf": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "max_features": 5000,
+    "sublinear_tf": true,
+    "min_df": 1
+  },
+  "metrics_test": {
+    "accuracy": 0.65,
+    "precision_macro": 0.6667,
+    "recall_macro": 0.65,
+    "f1_macro": 0.63,
+    "f1_weighted": 0.63
+  },
+  "trained_at_utc": "2026-09-29T12:43:48.448775+00:00"
+}

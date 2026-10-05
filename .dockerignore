@@ -1,0 +1,18 @@
+# Root build context (backend image). Keep the image lean and secret-free.
+.git/
+.github/
+.env
+*.db
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/.pytest_cache/
+frontend/node_modules/
+frontend/dist/
+ml/models/*.joblib
+ml/models/*.pkl
+ml/reports/*.png
+docs/field-study/evidence/
+*.tmp
+*.bak
+*.log

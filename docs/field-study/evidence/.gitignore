@@ -1,0 +1,10 @@
+# Raw field material stays out of git.
+# Only cleaned, anonymized summaries are committed (see parent README).
+*.jpg
+*.jpeg
+*.png
+*.pdf
+*.xlsx
+*.csv
+raw/
+private/

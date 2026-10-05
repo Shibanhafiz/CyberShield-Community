@@ -1,0 +1,101 @@
+text,category
+"Your class starts at 10 AM tomorrow in room 204.",NORMAL
+"Mom, I reached the hostel safely. Dinner was good.",NORMAL
+"Meeting rescheduled to Friday 3 PM. Please confirm your availability.",NORMAL
+"Happy birthday! Hope you have a wonderful day with your family.",NORMAL
+"The train 12639 is running 20 minutes late today.",NORMAL
+"Please bring milk and bread on your way home.",NORMAL
+"Your library books are due for return next Monday.",NORMAL
+"Team lunch tomorrow at 1 PM in the office cafeteria.",NORMAL
+"The doctor appointment is confirmed for Wednesday at 11 AM.",NORMAL
+"Hi, are we still meeting for coffee this Sunday evening?",NORMAL
+"URGENT! Your bank account will be blocked today. Verify your account immediately using this link http://verify-acct-secure.tk/login",PHISHING
+"Dear customer, your KYC is pending. Click here to update your details otherwise services will be suspended: bit.ly/kyc-update-99",PHISHING
+"Your email storage is full. Login here to increase quota: http://mail-service-desk.xyz/verify",PHISHING
+"Security alert: unusual login detected on your account. Confirm your identity now at http://secure-check-in.ml/auth",PHISHING
+"Your social media account will be deleted in 24 hours. Appeal here: http://account-appeal-center.tk",PHISHING
+"IT department notice: your password expires today. Reset it immediately at http://company-it-helpdesk.ga/reset",PHISHING
+"Congratulations! Your account has been selected for verification. Enter your username and password at http://reward-verify.tk",PHISHING
+"Tax refund of Rs 8500 is pending. Submit your bank details to claim at http://tax-refund-processing.ml",PHISHING
+"Your wallet has been locked due to suspicious activity. Unlock now: http://wallet-unlock-support.tk",PHISHING
+"Final notice: confirm your account information within 2 hours or access will be revoked http://account-confirm-alert.gq",PHISHING
+"Dear SBI customer, your account will be suspended today. Update KYC immediately: http://sbi-kyc-verify.tk",BANKING_SCAM
+"Alert: Rs 45000 debited from your account. If this was not you, share the OTP sent to your mobile to reverse it.",BANKING_SCAM
+"Your bank account has been frozen by RBI. Pay Rs 5000 verification fee to reactivate it.",BANKING_SCAM
+"SBI Yono: your login is disabled. Reactivate by entering your PIN and card number here: http://yono-reactivate.ml",BANKING_SCAM
+"Your account shows suspicious transactions. Our bank officer will call you; please keep your OTP ready.",BANKING_SCAM
+"Last warning: your PNB account will be closed. Verify with Aadhaar number and OTP now.",BANKING_SCAM
+"You received Rs 15000 credit in error. Return it immediately via UPI or face legal action.",BANKING_SCAM
+"Bank manager calling: your cheque bounced. Confirm your internet banking password to avoid penalty.",BANKING_SCAM
+"Your fixed deposit has matured. Share your account details and OTP to receive the amount.",BANKING_SCAM
+"Your HDFC debit card is blocked for online use. Call this number immediately and share your card details to unblock.",BANKING_SCAM
+"Congratulations, you have been selected for a work-from-home job. Pay Rs 500 registration fee immediately to confirm.",JOB_SCAM
+"Earn Rs 50000 per month from home. No experience needed. Send Rs 999 joining fee on WhatsApp now.",JOB_SCAM
+"Part-time data entry job: earn Rs 30000 weekly. First deposit Rs 2000 security amount to start.",JOB_SCAM
+"You are shortlisted for an Amazon warehouse role. Pay Rs 1500 for the offer letter and training kit.",JOB_SCAM
+"Work from home typing job with guaranteed income of Rs 40000. Registration closes today, pay now.",JOB_SCAM
+"Hi, I am HR from Infosys. You are selected. Transfer Rs 2500 document verification charge to receive the joining letter.",JOB_SCAM
+"Online rating task job: like videos and earn commission daily. Recharge Rs 1000 to activate your task account.",JOB_SCAM
+"Guaranteed government job placement. Pay Rs 10000 advance for a confirmed posting near your hometown.",JOB_SCAM
+"Telegram task job: complete 20 tasks daily and earn Rs 5000. Pay a membership fee of Rs 499 first.",JOB_SCAM
+"Freelance form-filling job with salary Rs 60000. Send your Aadhaar copy plus Rs 750 processing fee.",JOB_SCAM
+"Invest Rs 10000 today and receive guaranteed 300 percent returns in one week. Limited slots!",INVESTMENT_SCAM
+"Double your money in 30 days with our crypto trading plan. Minimum investment only Rs 5000.",INVESTMENT_SCAM
+"Join our stock tips group: 95 percent accuracy guaranteed. Pay Rs 2000 subscription for jackpot calls.",INVESTMENT_SCAM
+"Forex trading opportunity: invest $100 and earn $1000 weekly. Withdraw anytime. Message now.",INVESTMENT_SCAM
+"Pre-IPO shares of a top company at half price. Offer valid today only. Transfer funds now.",INVESTMENT_SCAM
+"Our AI bot generates 10 percent daily profit on crypto. Deposit now and watch your money grow risk-free.",INVESTMENT_SCAM
+"Gold investment plan: deposit Rs 50000, get Rs 90000 in 60 days guaranteed. Contact immediately.",INVESTMENT_SCAM
+"Earn Rs 10000 daily from options trading with our expert signals. Joining fee Rs 5000 only.",INVESTMENT_SCAM
+"New coin listing: buy now at Rs 10, it will reach Rs 1000 after launch. 100x guaranteed profit.",INVESTMENT_SCAM
+"Mutual fund doubling scheme with assured returns. Invest Rs 25000 today, offer ends tonight.",INVESTMENT_SCAM
+"Your parcel is held at the warehouse. Pay Rs 50 redelivery fee immediately using this link: http://parcel-release-desk.tk",DELIVERY_SCAM
+"India Post: your package could not be delivered. Update your address and pay Rs 25 here: bit.ly/post-redeliver",DELIVERY_SCAM
+"Your courier is out for delivery but the address is incomplete. Confirm here: http://courier-address-fix.ml",DELIVERY_SCAM
+"Customs duty of Rs 1200 is pending on your international parcel. Pay now to release: http://customs-clearance-pay.ga",DELIVERY_SCAM
+"Your Amazon order is delayed. Pay Rs 99 shipping insurance to receive it today: http://order-release-help.tk",DELIVERY_SCAM
+"PKG held due to unpaid fee Rs 75. Settle now http://delivery-fee-settle.ml or it will be returned.",DELIVERY_SCAM
+"BlueDart: failed delivery attempt. Reschedule by paying a Rs 30 token amount at this link.",DELIVERY_SCAM
+"Your Flipkart prize parcel is ready. Pay delivery charges of Rs 199 to claim it now.",DELIVERY_SCAM
+"FedEx: your shipment needs address verification. Click to confirm and pay Rs 45: http://fedex-verify-address.gq",DELIVERY_SCAM
+"Parcel locker code expired. Reopen delivery by paying a small Rs 20 fee here: http://locker-reopen.tk",DELIVERY_SCAM
+"Your account will be blocked. Send your OTP immediately to keep it active.",OTP_SCAM
+"I sent you a 6-digit code by mistake. Please forward the OTP to me now, it is urgent.",OTP_SCAM
+"This is bank security. An OTP was just sent to your phone. Read it out to stop a fraud transaction.",OTP_SCAM
+"OLX buyer: I am sending an advance payment. Share the OTP you receive to confirm your Google Pay account.",OTP_SCAM
+"Your SIM will be deactivated today. Share the OTP sent to your number to continue service.",OTP_SCAM
+"Customer care here: to process your refund of Rs 2999, please tell me the OTP on your screen.",OTP_SCAM
+"UPI verification: enter the OTP to receive Rs 5000 cashback in your account now.",OTP_SCAM
+"Lottery department: to release your Rs 5 lakh prize, first confirm the OTP sent to your mobile.",OTP_SCAM
+"Job portal verification: share the OTP to unlock your interview call letter.",OTP_SCAM
+"Electricity board: your connection will be cut tonight. Share the OTP to confirm payment and avoid disconnection.",OTP_SCAM
+"You are under investigation for money laundering. Stay on video call and transfer money immediately to prove innocence.",DIGITAL_ARREST
+"Mumbai Cyber Crime: your Aadhaar is linked to a criminal case. Do not disconnect this call. Pay the verification amount now.",DIGITAL_ARREST
+"CBI officer speaking. A parcel in your name contains illegal drugs. You are under digital arrest. Transfer Rs 200000 to cooperate.",DIGITAL_ARREST
+"Your phone number is involved in a fraud case. The police will arrest you in 2 hours unless you pay bail online now.",DIGITAL_ARREST
+"TRAI notice: your mobile will be blocked for illegal activity. Stay on Skype video call with our officer and follow instructions.",DIGITAL_ARREST
+"Supreme Court order: you are accused in a criminal case. Remain on camera and deposit Rs 50000 as security to avoid jail.",DIGITAL_ARREST
+"Narcotics department: drugs were found in a courier sent by you. Settle the case by transferring money to the officer account today.",DIGITAL_ARREST
+"I am calling from the police station. Your son is in custody. Send Rs 80000 immediately and do not tell anyone.",DIGITAL_ARREST
+"ED investigation: your bank accounts are frozen. Verify your funds by moving them to this safe account while on video call.",DIGITAL_ARREST
+"Cyber cell alert: objectionable content found linked to your number. Pay the penalty now or face arrest within 24 hours.",DIGITAL_ARREST
+"Hello, I am calling from Microsoft support. Your computer has a virus. Install this app so I can fix it.",FAKE_SUPPORT
+"Your Paytm KYC expired. Our agent is on the way. First confirm your details and OTP on this call.",FAKE_SUPPORT
+"This is the electricity department helpline. Download the QuickSupport app so we can fix your bill issue.",FAKE_SUPPORT
+"Amazon support: a suspicious order of Rs 54999 was placed on your account. Share your screen via TeamViewer to cancel it.",FAKE_SUPPORT
+"Google Pay support here: your account shows an error. Grant remote access to resolve it now.",FAKE_SUPPORT
+"SBI tech support: we are upgrading our servers. Confirm your internet banking login on the link sent by SMS.",FAKE_SUPPORT
+"Your antivirus has expired. Call our toll-free number and pay Rs 1499 renewal to our technician directly.",FAKE_SUPPORT
+"WhatsApp support: your number will be banned. Verify by sharing the 6-digit code with our agent.",FAKE_SUPPORT
+"PhonePe agent: your cashback of Rs 999 failed. Approve the support request on your screen to fix it.",FAKE_SUPPORT
+"Bank helpline: our officer will visit your home. Meanwhile keep your debit card and PIN ready for verification.",FAKE_SUPPORT
+"Congratulations! You won a Rs 10 lakh lottery. Pay Rs 5000 tax fee to claim your prize now.",OTHER_SCAM
+"You won an iPhone 15 in our lucky draw. Pay Rs 499 delivery to receive it: http://prize-claim-desk.ml",OTHER_SCAM
+"Hi dear, I am a soldier posted abroad. I want to send you expensive gifts; just pay the customs fee of Rs 15000.",OTHER_SCAM
+"Rental listing: 2BHK at half the market rent. The owner is abroad; transfer Rs 10000 token advance to book it today.",OTHER_SCAM
+"Your Aadhaar card will be deactivated. Update your details online by paying Rs 100 here: http://aadhaar-update-portal.ga",OTHER_SCAM
+"KBC lottery: your number won Rs 25 lakhs. Contact our manager on WhatsApp and pay the file charge.",OTHER_SCAM
+"Free government laptop scheme: register now with a Rs 300 processing fee. Offer ends tonight.",OTHER_SCAM
+"You have an unclaimed insurance maturity of Rs 80000. Pay a Rs 2000 release fee to our agent to get it.",OTHER_SCAM
+"Matrimonial match: I like your profile. Before we meet, recharge my phone with Rs 500 as a trust gesture.",OTHER_SCAM
+"PAN card misuse alert: your PAN is blocked. Pay a Rs 250 reactivation fee at this link immediately.",OTHER_SCAM

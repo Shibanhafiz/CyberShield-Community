@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* CyberShield civic light theme — centralized design tokens.
+   No gradients, no glassmorphism, no glow. Borders do the visual work. */
+@theme {
+  --color-paper: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-ink: #0f172a;
+  --color-ink-2: #475569;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-brand: #2563eb;
+  --color-brand-dark: #1d4ed8;
+  --color-brand-tint: #eff6ff;
+  --color-ok: #15803d;
+  --color-ok-tint: #f0fdf4;
+  --color-warn: #d97706;
+  --color-warn-tint: #fffbeb;
+  --color-bad: #dc2626;
+  --color-bad-tint: #fef2f2;
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05);
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  background-color: var(--color-paper);
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus everywhere — accessibility baseline. */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background-color: #bfdbfe;
+}

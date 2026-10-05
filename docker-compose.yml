@@ -1,0 +1,72 @@
+# CyberShield Community — local development stack.
+#
+#   Frontend (nginx :80) → Backend API (:8001) → PostgreSQL (:5432)
+#
+# Usage:
+#   1. cp .env.example .env   # .env is git-ignored; set JWT_SECRET at least
+#   2. docker compose up --build
+#   3. Open http://localhost  (API health: http://localhost:8001/api/health)
+#
+# NO secrets live in this file. Everything sensitive comes from the
+# environment (JWT_SECRET is required and fails fast with a clear error).
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cybershield}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env (any local value for dev)}
+      POSTGRES_DB: ${POSTGRES_DB:-cybershield}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-cybershield}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENV: ${APP_ENV:-development}
+      BACKEND_HOST: "0.0.0.0"
+      BACKEND_PORT: "8001"
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-cybershield}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:-cybershield}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (any long random string for local dev)}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-60}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost}
+      # nginx appends X-Forwarded-For and is part of this stack, so the
+      # backend may trust it here. Do NOT enable for untrusted proxies.
+      TRUST_PROXY: "true"
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/api/ready')\""]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_BACKEND_URL: ${PUBLIC_BACKEND_URL:-http://localhost:8001}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata:

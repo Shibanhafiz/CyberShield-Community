@@ -1,0 +1,19 @@
+model_version: baseline-v1
+test_size: 20
+
+                 precision    recall  f1-score   support
+
+         NORMAL       1.00      1.00      1.00         2
+       PHISHING       0.50      0.50      0.50         2
+   BANKING_SCAM       0.00      0.00      0.00         2
+       JOB_SCAM       0.50      1.00      0.67         2
+INVESTMENT_SCAM       1.00      1.00      1.00         2
+  DELIVERY_SCAM       1.00      0.50      0.67         2
+       OTP_SCAM       1.00      1.00      1.00         2
+ DIGITAL_ARREST       0.67      1.00      0.80         2
+   FAKE_SUPPORT       1.00      0.50      0.67         2
+     OTHER_SCAM       0.00      0.00      0.00         2
+
+       accuracy                           0.65        20
+      macro avg       0.67      0.65      0.63        20
+   weighted avg       0.67      0.65      0.63        20
