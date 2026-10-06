@@ -43,6 +43,14 @@ Low = hygiene / defense-in-depth.
 - **Logout**: client discards the JWT (memory + localStorage) and redirects; invalid tokens are cleared by the route guard. Tokens are stateless with a 60-minute expiry (documented limitation: no server-side revocation list at this scale).
 - **ML reliability**: pipeline loads once (module-level cached `_pipeline`, thread-locked); missing model → controlled `ModelUnavailableError` → 503; preprocessing lives in the shared `preprocess` module used by both training and serving; version recorded in metadata and responses; wording stays indicative ("Potentially suspicious"), confidence labeled as model confidence, not fraud probability.
 
+## Phase 7 re-audit findings (write-path review)
+
+| # | Issue | Severity | Location | Why it matters | Fix implemented | Verification |
+|---|-------|----------|----------|----------------|-----------------|--------------|
+| 18 | Awareness before/after endpoints had no rate limit, yet each call persists a quiz attempt row (+ session upsert) — an unlimited side channel around the QUIZ limiter. | Medium | `backend/app/routes/awareness.py` | Anonymous junk-row spam against the database. | Both endpoints share the QUIZ limiter via the same proxy-aware client key. | `test_awareness_endpoints_share_quiz_budget` |
+| 19 | Anonymous feedback submission had no rate limit (creates a row per call). | Low | `backend/app/routes/feedback.py`, `services/limits.py`, `config.py` | Same spam class as reports, which were already limited. | New FEEDBACK limiter (10/hour default, `FEEDBACK_RATE_LIMIT*` env). | `test_feedback_submission_rate_limited` |
+| 20 | Awareness CSV export loaded unbounded tables (`.all()` with no cap; reports/feedback exports cap at 5000). | Low | `backend/app/routes/export.py` | Memory/time blowup on large datasets. | `.limit(5000)` on sessions + attempts queries. | Code read + suite green |
+
 ## Residual risks (not fixed — documented limitations)
 
 - In-memory rate limiting is per-process; real enforcement belongs at the reverse proxy (documented in `security.md` + `deployment-checklist.md`).

@@ -42,6 +42,24 @@
 Role comes from the **database row**, never from the token's `role` claim
 (a forged claim cannot escalate — regression-tested).
 
+## Rate limits (in-memory per process; proxy enforces for real)
+
+| Endpoint | Limiter | Default budget | Env vars |
+|---|---|---|---|
+| `POST /api/admin/login` | LOGIN | 5 / 300 s | `LOGIN_RATE_LIMIT`, `LOGIN_RATE_WINDOW_SECONDS` |
+| `POST /api/reports` | REPORTS | 10 / hour | `REPORT_RATE_LIMIT`, `REPORT_RATE_WINDOW_SECONDS` |
+| `POST /api/analyze/*` | ANALYZE | 60 / hour | `ANALYZE_RATE_LIMIT`, `ANALYZE_RATE_WINDOW_SECONDS` |
+| `POST /api/quiz/attempt`, `POST /api/awareness/before|after` | QUIZ | 30 / hour | `QUIZ_RATE_LIMIT`, `QUIZ_RATE_WINDOW_SECONDS` |
+| `POST /api/feedback` | FEEDBACK | 10 / hour | `FEEDBACK_RATE_LIMIT`, `FEEDBACK_RATE_WINDOW_SECONDS` |
+
+Every anonymous row-creating endpoint is throttled (awareness + feedback
+were added in the Phase 7 re-audit — they each persist rows). Read-only
+and already-authenticated endpoints are not throttled in-app. Keys are
+proxy-aware (`TRUST_PROXY`) and limiter memory is bounded
+(`test_limiter_memory_is_bounded`). CSRF note: the JWT travels in the
+`Authorization` header, never in cookies, so there is no cookie-based
+CSRF vector; a future cookie session scheme would need CSRF tokens.
+
 ## Input handling & output encoding
 
 - Pydantic schemas on every body; `Query(...)` bounds on pagination

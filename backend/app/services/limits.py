@@ -8,6 +8,9 @@ and tests can reset all counters at once:
     POST /api/analyze/message  ANALYZE
     POST /api/analyze/url      ANALYZE
     POST /api/quiz/attempt     QUIZ
+    POST /api/awareness/before QUIZ   (each call stores a quiz attempt)
+    POST /api/awareness/after  QUIZ   (each call stores a quiz attempt)
+    POST /api/feedback         FEEDBACK
 
 Limits are environment-aware (ANALYZE_RATE_LIMIT, QUIZ_RATE_LIMIT, ...).
 Defaults are generous so normal development/testing is never blocked;
@@ -45,8 +48,11 @@ ANALYZE = RateLimiter(
 QUIZ = RateLimiter(
     settings.QUIZ_RATE_LIMIT, settings.QUIZ_RATE_WINDOW_SECONDS
 )
+FEEDBACK = RateLimiter(
+    settings.FEEDBACK_RATE_LIMIT, settings.FEEDBACK_RATE_WINDOW_SECONDS
+)
 
-ALL_LIMITERS = (LOGIN, REPORTS, ANALYZE, QUIZ)
+ALL_LIMITERS = (LOGIN, REPORTS, ANALYZE, QUIZ, FEEDBACK)
 
 
 def reset_all() -> None:
@@ -64,3 +70,5 @@ def restore_defaults() -> None:
                                              settings.ANALYZE_RATE_WINDOW_SECONDS)
     QUIZ.limit, QUIZ.window_seconds = (settings.QUIZ_RATE_LIMIT,
                                        settings.QUIZ_RATE_WINDOW_SECONDS)
+    FEEDBACK.limit, FEEDBACK.window_seconds = (
+        settings.FEEDBACK_RATE_LIMIT, settings.FEEDBACK_RATE_WINDOW_SECONDS)

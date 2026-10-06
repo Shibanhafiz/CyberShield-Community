@@ -2,7 +2,7 @@
 
 import logging
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Request, status
 from fastapi.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
@@ -13,12 +13,14 @@ from ..schemas.learning import (
     AwarenessSubmit,
     ImpactSummary,
 )
+from ..services import limits
 from ..services.quiz_service import (
     get_impact,
     record_awareness,
     score_answers,
     validate_session_id,
 )
+from ..services.safety import client_key
 
 logger = logging.getLogger("cybershield.routes.awareness")
 
@@ -38,8 +40,20 @@ def _score_assessment(db: Session, session_id: str, kind: str,
     return {**result, "session": summary}
 
 
+def _check_limit(request: Request) -> None:
+    # Before/after assessments each persist a quiz attempt row, so they
+    # share the QUIZ budget (Phase 7 audit: previously unlimited).
+    if not limits.QUIZ.is_allowed(client_key(request, "quiz")):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too many assessment attempts. Please try again later.",
+        )
+
+
 @router.post("/awareness/before")
-async def awareness_before(payload: AwarenessSubmit, db: Session = Depends(get_db)):
+async def awareness_before(payload: AwarenessSubmit, request: Request,
+                           db: Session = Depends(get_db)):
+    _check_limit(request)
     try:
         answers = [{"question_id": a.question_id, "selected": a.selected}
                    for a in payload.answers]
@@ -51,7 +65,9 @@ async def awareness_before(payload: AwarenessSubmit, db: Session = Depends(get_d
 
 
 @router.post("/awareness/after")
-async def awareness_after(payload: AwarenessSubmit, db: Session = Depends(get_db)):
+async def awareness_after(payload: AwarenessSubmit, request: Request,
+                          db: Session = Depends(get_db)):
+    _check_limit(request)
     try:
         answers = [{"question_id": a.question_id, "selected": a.selected}
                    for a in payload.answers]

@@ -3,7 +3,7 @@
 import logging
 from collections import Counter
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Request, status
 from fastapi.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
@@ -13,6 +13,8 @@ from ..deps import require_reviewer
 from ..models.admin_user import AdminUser
 from ..models.feedback import Feedback
 from ..schemas.admin import FeedbackIn, FeedbackOut, FeedbackStats
+from ..services import limits
+from ..services.safety import client_key
 
 logger = logging.getLogger("cybershield.routes.feedback")
 
@@ -28,7 +30,15 @@ def _unavailable(exc: Exception):
 
 
 @router.post("/feedback", response_model=FeedbackOut, status_code=201)
-async def submit_feedback(payload: FeedbackIn, db: Session = Depends(get_db)):
+async def submit_feedback(payload: FeedbackIn, request: Request,
+                          db: Session = Depends(get_db)):
+    # Anonymous row creation — throttled like reports (Phase 7 audit:
+    # previously unlimited).
+    if not limits.FEEDBACK.is_allowed(client_key(request, "feedback")):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too much feedback from this address. Please try again later.",
+        )
     try:
         row = Feedback(
             session_id=payload.session_id,

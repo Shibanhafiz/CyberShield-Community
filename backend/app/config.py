@@ -80,6 +80,8 @@ class Settings:
     ANALYZE_RATE_WINDOW_SECONDS: int = _get_int("ANALYZE_RATE_WINDOW_SECONDS", 3600)
     QUIZ_RATE_LIMIT: int = _get_int("QUIZ_RATE_LIMIT", 30)
     QUIZ_RATE_WINDOW_SECONDS: int = _get_int("QUIZ_RATE_WINDOW_SECONDS", 3600)
+    FEEDBACK_RATE_LIMIT: int = _get_int("FEEDBACK_RATE_LIMIT", 10)
+    FEEDBACK_RATE_WINDOW_SECONDS: int = _get_int("FEEDBACK_RATE_WINDOW_SECONDS", 3600)
 
     # Max request body accepted for /api routes (413 beyond this).
     MAX_BODY_BYTES: int = _get_int("MAX_BODY_BYTES", 256 * 1024)

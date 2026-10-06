@@ -86,10 +86,11 @@ async def export_reports(admin: AdminUser = Depends(require_admin),
 async def export_awareness(admin: AdminUser = Depends(require_admin),
                            db: Session = Depends(get_db)):
     try:
+        # Capped like the other exports (Phase 7 audit: previously unbounded).
         sessions = db.query(AwarenessSession).filter(
-            AwarenessSession.is_demo_data.is_(False)).all()
+            AwarenessSession.is_demo_data.is_(False)).limit(5000).all()
         attempts = db.query(QuizAttempt).filter(
-            QuizAttempt.is_demo_data.is_(False)).all()
+            QuizAttempt.is_demo_data.is_(False)).limit(5000).all()
         data = [{"session_id": s.session_id, "before_score": s.before_score,
                  "before_total": s.before_total, "after_score": s.after_score,
                  "after_total": s.after_total,

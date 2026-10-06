@@ -674,3 +674,31 @@ def test_production_guard_refuses_unsafe_config(monkeypatch):
 
 def test_docs_toggle_defaults():
     assert settings.ENABLE_DOCS is True  # dev default
+
+
+# ------------------------------------------- phase-7 re-audit: missed limits
+
+def test_awareness_endpoints_share_quiz_budget(isolated_client, monkeypatch):
+    # Before/after assessments each persist a quiz attempt, so they must
+    # not be an unlimited side channel around the QUIZ limiter.
+    monkeypatch.setattr(limits.QUIZ, "limit", 2)
+    qs = isolated_client.get("/api/quiz/questions",
+                             params={"quiz_type": "assessment"}).json()
+    assert len(qs) > 0
+    body = {"session_id": str(uuid.uuid4()),
+            "answers": [{"question_id": q["id"], "selected": 0} for q in qs]}
+    assert isolated_client.post("/api/awareness/before",
+                                json=body).status_code == 200
+    assert isolated_client.post("/api/awareness/after",
+                                json=body).status_code == 200
+    r = isolated_client.post("/api/awareness/before", json=body)
+    assert r.status_code == 429 and r.json()["error"] == "rate_limited"
+
+
+def test_feedback_submission_rate_limited(isolated_client, monkeypatch):
+    monkeypatch.setattr(limits.FEEDBACK, "limit", 2)
+    body = {"topic": "Rate Cap", "rating": 4}
+    assert isolated_client.post("/api/feedback", json=body).status_code == 201
+    assert isolated_client.post("/api/feedback", json=body).status_code == 201
+    r = isolated_client.post("/api/feedback", json=body)
+    assert r.status_code == 429 and r.json()["error"] == "rate_limited"
