@@ -1,0 +1,3 @@
+obs_id,session_code,date,category,activity,issue,severity,proposal,status
+DEMO-O1,DEMO-A,2026-10-01,mixed,quiz,small buttons on old phone,medium,larger targets,fixed
+DEMO-O2,DEMO-A,2026-10-01,mixed,scenario,OTP wording confused one participant,low,simplify wording,open

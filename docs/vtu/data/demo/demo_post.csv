@@ -1,0 +1,5 @@
+session_id,date,locality,category,q1,q2,q3,q4,q5,q6
+demo-s01,2026-10-01,Demo Town,Student,1,1,1,0,1,1
+demo-s02,2026-10-01,Demo Town,Student,1,0,1,1,0,1
+demo-s03,2026-10-01,Demo Town,Merchant,1,1,1,0,1,0
+demo-s09,2026-10-01,Demo Town,Student,1,1,1,1,1,1
