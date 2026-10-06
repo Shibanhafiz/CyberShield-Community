@@ -92,6 +92,11 @@ holds no long transactions (request-scoped sessions closed per request).
 Destructive initialization is disabled by construction — `init_db()` only
 creates-missing and upserts seed rows.
 
+Reset procedure (development/demo only — **never on a field database**):
+stop the backend, delete the SQLite file (`backend/cybershield_phase1.db`)
+or drop + recreate the dev Postgres database, then boot (schema + seeds
+rebuild automatically). There is no in-app reset endpoint by design.
+
 ## Backend deployment notes
 
 - Start command: `uvicorn app.main:app --host 127.0.0.1 --port 8001`

@@ -170,6 +170,39 @@ community analytics · 5: learning/quiz/awareness · 6: admin + field-study
 dashboard · 7: security hardening + test suites · 8: deployment, docs,
 VTU submission (this release, v0.7.0).
 
+## How it works
+
+Paste → **Analyze** (rules + ML signal + static URL signals) → **Understand**
+(explained indicators + safe action, score secondary) → optionally **Report**
+(redacted, hashed, deduped) → **Learn/measure** (quiz + before/after) →
+**Review** (RBAC moderation, audit, exports). Full flows: `docs/diagrams.md`.
+
+## Project structure
+
+```text
+cybershield/
+├── frontend/        React 19 + Vite + Tailwind (mobile-first light UI)
+├── backend/        FastAPI (app/, tests/, scripts/)
+├── ml/             TF-IDF+LogReg pipeline (src/, data/, models/, reports/)
+├── docs/           guides + security audit + test report
+├── docs/vtu/       VTU submission package (status: software done, field pending)
+├── docs/field-study/  field instruments + evidence scaffold
+├── docker-compose.yml + Dockerfiles + nginx.conf
+└── .env.example    Dev/Test/Prod placeholders (never real secrets)
+```
+
+## Project status
+
+Software complete through Phase 8 (v0.7.0): 147 backend + 57 frontend
+tests green, hardened, deployment-documented. Field validation pending
+(Phase 9). Honest tracker: `docs/vtu/project-status.md`.
+
+## Contributing
+
+Small, reviewed changes with tests: backend `pytest`, frontend `npm test`
++ `vite build`, no secrets, no fabricated data/claims. See
+`docs/testing.md` and `docs/security-checklist.md`.
+
 ## Contributors
 
 Project team, VTU 1BCP308 community project. (Add member names + roles here.)
