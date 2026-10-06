@@ -23,7 +23,10 @@ def test_scenarios_list_and_interaction(isolated_client):
     first = scenarios[0]["scenario_id"]
     detail = isolated_client.get(f"/api/learning/scenarios/{first}").json()
     assert len(detail["choices"]) == 4
-    assert "correct_action" not in str(detail["choices"]) or True
+    # The correct answer must not be exposed before responding (Phase 5:
+    # the detail endpoint used to leak it as `recommended_action`).
+    assert "recommended_action" not in detail
+    assert "correct_action" not in detail
     # Correct text must not be labeled; find it via message-independent check:
     # answer each position, exactly one must be safe.
     safe_count = 0

@@ -31,9 +31,11 @@ class ScenarioSummary(BaseModel):
 class ScenarioDetail(ScenarioSummary):
     message: str
     warning_signals: list[str] = Field(default_factory=list)
-    choices: list[str]  # shuffled; correct index NOT exposed
+    choices: list[str]  # shuffled; the correct answer is NOT exposed here
     explanation: str
-    recommended_action: str
+    # NOTE: no recommended_action / correct_action field — the answer is
+    # revealed only by POST .../answer after the user responds (Phase 5 fix:
+    # the detail endpoint used to leak the correct action text).
 
 
 class ScenarioAnswer(BaseModel):

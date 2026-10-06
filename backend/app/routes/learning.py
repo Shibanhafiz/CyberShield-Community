@@ -89,8 +89,7 @@ async def scenario_detail(scenario_id: str, db: Session = Depends(get_db)):
         return {"scenario_id": s.scenario_id, "category": s.category,
                 "title": s.title, "difficulty": s.difficulty, "message": s.message,
                 "warning_signals": json.loads(s.warning_signals),
-                "choices": scenario_choices(s), "explanation": s.explanation,
-                "recommended_action": s.correct_action}
+                "choices": scenario_choices(s), "explanation": s.explanation}
     except SQLAlchemyError as exc:
         return _unavailable(exc)
 
