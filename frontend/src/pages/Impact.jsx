@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import StatCard from '../components/StatCard';
 import { Alert, Button, Container, EmptyState, PageHeader } from '../components/ui';
 import { getImpactSummary } from '../api';
@@ -37,6 +38,10 @@ export default function Impact() {
 
   return (
     <Container>
+      <PageMeta
+        title="Community Impact"
+        description="Real aggregated awareness metrics from this platform: quizzes, sessions and score changes. Nothing estimated."
+      />
       <PageHeader
         eyebrow="Impact"
         title="Community impact"

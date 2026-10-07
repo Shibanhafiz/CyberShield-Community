@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import QuizRunner from '../components/QuizRunner';
 import { Alert, Card, Container, PageHeader } from '../components/ui';
 import { getQuizQuestions, getSessionId, submitQuizAttempt } from '../api';
@@ -34,7 +35,7 @@ export default function Quiz() {
     );
   }
 
-  if (error || !questions) {
+  if (error || !questions || questions.length === 0) {
     return (
       <Container narrow>
         <Alert tone="error">{error || 'Quiz unavailable.'}</Alert>
@@ -44,6 +45,10 @@ export default function Quiz() {
 
   return (
     <Container narrow>
+      <PageMeta
+        title="Awareness Quiz"
+        description="Answer randomized scam-awareness questions with server-side scoring, explanations and topics to review."
+      />
       <PageHeader
         eyebrow="Quiz"
         title="Awareness quiz"

@@ -108,12 +108,51 @@ rebuild automatically). There is no in-app reset endpoint by design.
 
 ## Frontend deployment notes
 
-- `npm ci && npm run build` → static `dist/` (verified clean: 6.5s,
-  839 KB JS / 239 KB gzip).
+- `npm ci && npm run build` → static `dist/` (main ~415 KB JS,
+  charts split into an on-demand ~412 KB chunk).
 - SPA fallback required: `/analyze`, `/admin/*` etc. must serve
   `index.html` (nginx `try_files` in `frontend/nginx.conf`; Vercel/Netlify
   SPA settings equivalently).
+- Vercel: set the project **Root Directory to `frontend/`** so
+  `frontend/vercel.json` applies. It provides the SPA fallback plus an
+  `/api/*` rewrite. **Before deploying, replace
+  `https://REPLACE-WITH-BACKEND-URL` with the real backend origin**
+  (Render/Fly service URL) — the app calls same-origin `/api/*`, so
+  without this edit all API calls fail. Then set the backend's
+  `ALLOWED_ORIGINS` to the Vercel domain.
 - Only public config in `VITE_*` (currently just the backend URL).
+- Share image ships at `frontend/public/og-image.png` (plain branded
+  mark); replace `cybershield.example.org` with the launch domain in
+  `frontend/index.html` (OG/Twitter/JSON-LD) and rebuild (or set
+  `SITEMAP_BASE_URL` so the sitemap uses it too).
+
+## Production rollout order (Vercel + Render + PostgreSQL)
+
+**STEP 1** — Deploy PostgreSQL (Render managed instance; note the
+internal/external URLs).
+**STEP 2** — Deploy the Render backend via Docker (`render.yaml`
+blueprint or manual Docker Web Service; model trains during the image
+build — a successful build proves the training path).
+**STEP 3** — Set backend env: `ENV=production`, `DATABASE_URL` (managed
+Postgres), strong `JWT_SECRET`, `ALLOWED_ORIGINS` (placeholder until
+Step 7, then the real frontend domain), `TRUST_PROXY=true`. See
+“Environment variables (production)” above — every value is manual.
+**STEP 4** — Verify: `GET /health` → ok/production;
+`GET /api/ready` → `ready: true` (proves DB + model loaded).
+**STEP 5** — Copy the real Render backend URL.
+**STEP 6** — Replace `REPLACE-WITH-BACKEND-URL` in
+`frontend/vercel.json` and the launch domain in `frontend/index.html`
+(OG/Twitter/JSON-LD) or set `SITEMAP_BASE_URL`; rebuild.
+**STEP 7** — Deploy the frontend to Vercel (Root Directory `frontend/`);
+update backend `ALLOWED_ORIGINS` to the Vercel domain.
+**STEP 8** — Verify: homepage, deep links (`/learn`, `/quiz`), `/privacy`,
+analyzers, community dashboard, admin login, real-404 on a bogus path,
+and that `/api/*` reaches the backend (not a Vercel 404).
+**STEP 9** — Post-deployment smoke tests: report → moderate → export,
+quiz + awareness attempt, CSV download, audit entry; confirm zero
+`is_demo_data` rows; check share preview + Search Console.
+**STEP 10** — Only after green verification, point the final production
+domain (DNS + TLS) at the frontend and backend.
 
 ## Production verification (run after every deploy)
 

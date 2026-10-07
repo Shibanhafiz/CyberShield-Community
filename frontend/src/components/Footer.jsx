@@ -28,6 +28,7 @@ export default function Footer() {
           <p className="font-semibold text-ink">Project</p>
           <ul className="mt-2 space-y-1.5 text-ink-2">
             <li><Link className="hover:text-brand-dark hover:underline" to="/about">About &amp; VTU 1BCP308</Link></li>
+            <li><Link className="hover:text-brand-dark hover:underline" to="/privacy">Privacy</Link></li>
             <li><Link className="hover:text-brand-dark hover:underline" to="/community">Community dashboard</Link></li>
             <li><Link className="hover:text-brand-dark hover:underline" to="/admin">Admin console</Link></li>
           </ul>

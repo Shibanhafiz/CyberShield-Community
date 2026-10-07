@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 import LoadingState from '../../components/LoadingState';
+import PageMeta from '../../components/PageMeta';
 import { Alert, Button, Card, Container, Field, TextInput } from '../../components/ui';
 import { adminLogin, apiErrorMessage, setAdminToken } from '../../api';
 
@@ -39,6 +40,10 @@ export default function AdminLogin() {
 
   return (
     <Container narrow>
+      <PageMeta
+        title="Admin Login"
+        description="Restricted sign-in for authorized CyberShield Community reviewers."
+      />
       <div className="mx-auto max-w-md">
         <Card>
           <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-tint text-brand-dark" aria-hidden>

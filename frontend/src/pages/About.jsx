@@ -1,8 +1,13 @@
+import PageMeta from '../components/PageMeta';
 import { Card, Container, PageHeader } from '../components/ui';
 
 export default function About() {
   return (
     <Container narrow>
+      <PageMeta
+        title="About"
+        description="About CyberShield Community, a VTU student community project for scam awareness, and what the system can and cannot do."
+      />
       <PageHeader
         eyebrow="VTU 1BCP308 · Community project"
         title="About CyberShield Community"

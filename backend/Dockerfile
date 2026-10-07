@@ -31,6 +31,9 @@ USER appuser
 WORKDIR /app/backend
 EXPOSE 8001
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/ready')"
+    CMD python -c "import os, urllib.request; urllib.request.urlopen('http://localhost:' + os.environ.get('PORT', '8001') + '/api/ready')"
 # All configuration via environment (see .env.example). Never bake secrets here.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001"]
+# Shell form (not exec form) so ${PORT} actually expands: platforms like
+# Render inject PORT, while local runs keep the 8001 default. Dev workflow
+# (`uvicorn ... --port 8001`) is unaffected.
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}

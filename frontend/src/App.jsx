@@ -10,7 +10,8 @@ import Awareness from './pages/Awareness';
 import Home from './pages/Home';
 import Impact from './pages/Impact';
 import Learn from './pages/Learn';
-import Placeholder from './pages/Placeholder';
+import NotFound from './pages/NotFound';
+import Privacy from './pages/Privacy';
 import Quiz from './pages/Quiz';
 import Report from './pages/Report';
 import Scenario from './pages/Scenario';
@@ -72,6 +73,7 @@ export default function App() {
             <Route path="/awareness" element={<Awareness />} />
             <Route path="/impact" element={<Impact />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
@@ -83,10 +85,7 @@ export default function App() {
               <Route path="exports" element={<Exports />} />
               <Route path="audit" element={<Audit />} />
             </Route>
-            <Route
-              path="*"
-              element={<Placeholder title="Page not found" text="This page does not exist. Use the navigation above." />}
-            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

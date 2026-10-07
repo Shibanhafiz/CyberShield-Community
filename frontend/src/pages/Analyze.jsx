@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link2, Mail, MessageSquareText } from 'lucide-react';
+import PageMeta from '../components/PageMeta';
 import AnalysisResult from '../components/AnalysisResult';
 import LoadingState from '../components/LoadingState';
 import UrlAnalysisResult from '../components/UrlAnalysisResult';
@@ -67,6 +68,12 @@ export default function Analyze({ initialTab = 'message' }) {
 
   return (
     <Container narrow>
+      <PageMeta
+        title={isUrl ? 'Check a URL' : 'Check a Message'}
+        description={isUrl
+          ? 'Paste a suspicious link to inspect its structure for impersonation and deception patterns. Links are never visited.'
+          : 'Paste a suspicious SMS, WhatsApp message or email to see common scam indicators, a risk level and the recommended safe action.'}
+      />
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Analyzer</p>
       <h1 className="mt-1.5 text-2xl font-bold tracking-tight text-ink md:text-[28px]">
         {isUrl ? 'Check a suspicious link' : 'Check a suspicious message'}

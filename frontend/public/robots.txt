@@ -1,0 +1,10 @@
+# CyberShield Community — crawler rules.
+# No site-wide Disallow: the public site is fully crawlable.
+# Admin console is intentionally kept out of the index and sitemap.
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Use the absolute launch-domain URL in production, e.g.:
+# Sitemap: https://your-domain.example/sitemap.xml
+Sitemap: /sitemap.xml

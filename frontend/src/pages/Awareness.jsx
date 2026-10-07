@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import QuizRunner from '../components/QuizRunner';
 import { Alert, Button, Card, Container, PageHeader } from '../components/ui';
 import {
@@ -66,7 +67,7 @@ export default function Awareness() {
     );
   }
 
-  if (error || !questions) {
+  if (error || !questions || questions.length === 0) {
     return (
       <Container narrow>
         <Alert tone="error">{error || 'Assessment unavailable.'}</Alert>
@@ -78,6 +79,10 @@ export default function Awareness() {
 
   return (
     <Container narrow>
+      <PageMeta
+        title="Before / After Assessment"
+        description="Answer 6 questions, study the learning material, then answer again to see how your awareness score changed."
+      />
       <PageHeader
         eyebrow="Awareness"
         title="Before / After Assessment"

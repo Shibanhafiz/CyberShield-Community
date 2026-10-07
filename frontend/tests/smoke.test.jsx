@@ -7,7 +7,7 @@ import FeedbackForm from '../src/components/FeedbackForm';
 import Navbar from '../src/components/Navbar';
 import About from '../src/pages/About';
 import Impact from '../src/pages/Impact';
-import Placeholder from '../src/pages/Placeholder';
+import NotFound from '../src/pages/NotFound';
 import Audit from '../src/pages/admin/Audit';
 import AwarenessAdmin from '../src/pages/admin/AwarenessAdmin';
 import Analytics from '../src/pages/admin/Analytics';
@@ -152,9 +152,12 @@ describe('page render smoke (no crashes, honest states)', () => {
     expect(screen.getByText('No audit entries match.')).toBeInTheDocument();
   });
 
-  test('placeholder 404 renders with home action', () => {
-    render(<MemoryRouter><Placeholder /></MemoryRouter>);
-    expect(screen.getByText('Page not found')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /back to home/i })).toBeInTheDocument();
+  test('404 page renders with links to main pages', () => {
+    render(<MemoryRouter><NotFound /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: /page not found/i })).toBeInTheDocument();
+    const hrefs = screen.getAllByRole('link').map((l) => l.getAttribute('href'));
+    for (const href of ['/', '/analyze', '/analyze/url', '/community', '/learn', '/quiz']) {
+      expect(hrefs).toContain(href);
+    }
   });
 });

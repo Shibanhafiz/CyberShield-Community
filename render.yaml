@@ -1,0 +1,27 @@
+# Render Blueprint — CyberShield backend only (Docker deploy).
+# The model is trained inside the image build, so no artifact upload needed.
+# No secrets, URLs, or passwords live here: DATABASE_URL and ALLOWED_ORIGINS
+# are sync:false (Render prompts for them), JWT_SECRET is auto-generated.
+# Pair with a managed PostgreSQL instance and set its URL as DATABASE_URL.
+services:
+  - type: web
+    name: cybershield-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/ready
+    envVars:
+      - key: ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false
+      # Render terminates TLS at its trusted proxy and forwards
+      # X-Forwarded-For; trust it so per-client rate-limit keys work.
+      # Keep real rate enforcement at the edge regardless.
+      - key: TRUST_PROXY
+        value: "true"

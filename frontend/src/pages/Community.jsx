@@ -15,6 +15,7 @@ import {
   YAxis,
 } from 'recharts';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import { Alert, Card, Container, EmptyState, PageHeader, Stat, Table, Td, Th } from '../components/ui';
 import {
   getCommunityAreas,
@@ -91,6 +92,10 @@ export default function Community() {
 
   return (
     <Container>
+      <PageMeta
+        title="Community Dashboard"
+        description="Anonymous aggregated community scam reports: totals, trends, categories and coarse areas. Shows an honest empty state when no data exists."
+      />
       <PageHeader
         eyebrow="Community"
         title="Community dashboard"

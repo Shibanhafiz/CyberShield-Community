@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import { Alert, Button, Card, Container, Field, PageHeader, Select, TextArea, TextInput } from '../components/ui';
 import { apiErrorMessage, submitReport } from '../api';
 
@@ -83,6 +84,10 @@ export default function Report() {
 
   return (
     <Container narrow>
+      <PageMeta
+        title="Report a Scam"
+        description="Submit an anonymous scam report to help the community track emerging patterns. Sensitive values are masked automatically."
+      />
       <PageHeader
         eyebrow="Report"
         title="Report a scam"

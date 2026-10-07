@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, CheckCircle2, ChevronDown, FlaskConical, GraduationCap, LineChart, XCircle } from 'lucide-react';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import FeedbackForm from '../components/FeedbackForm';
 import { Alert, Button, Card, Container, EmptyState, PageHeader } from '../components/ui';
 import { getScenarios, getTopic, getTopics } from '../api';
@@ -149,6 +150,10 @@ export default function Learn() {
 
   return (
     <Container>
+      <PageMeta
+        title="Learn About Scams"
+        description="Short plain-language lessons on phishing, OTP fraud and more, with practice scenarios, quizzes and anonymous feedback."
+      />
       <PageHeader
         eyebrow="Learn"
         title="Cyber safety learning center"

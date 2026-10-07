@@ -676,6 +676,18 @@ def test_docs_toggle_defaults():
     assert settings.ENABLE_DOCS is True  # dev default
 
 
+def test_docker_startup_honors_port_env():
+    """Production platforms inject PORT; the container must listen on it
+    (regression: CMD hardcoded --port 8001, unreachable on Render/Fly)."""
+    import pathlib
+
+    dockerfile = pathlib.Path(__file__).resolve().parents[1] / "Dockerfile"
+    content = dockerfile.read_text(encoding="utf-8")
+    assert "${PORT:-8001}" in content
+    assert "--port\", \"8001\"" not in content
+    assert "os.environ.get('PORT', '8001')" in content  # healthcheck agrees
+
+
 # ------------------------------------------- phase-7 re-audit: missed limits
 
 def test_awareness_endpoints_share_quiz_budget(isolated_client, monkeypatch):

@@ -10,6 +10,7 @@ __pycache__/
 *.key
 frontend/node_modules/
 frontend/dist/
+frontend/public/sitemap.xml
 ml/models/*.joblib
 ml/models/*.pkl
 docs/assets/

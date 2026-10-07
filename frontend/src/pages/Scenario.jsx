@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
 import LoadingState from '../components/LoadingState';
+import PageMeta from '../components/PageMeta';
 import { Alert, Button, Card, Container } from '../components/ui';
 import { answerScenario, getScenario, getScenarios } from '../api';
 
@@ -68,6 +69,10 @@ export default function Scenario() {
 
   return (
     <Container narrow>
+      <PageMeta
+        title="Practice Scenario"
+        description="Decide what to do about a fictional scam message, then see why the safe choice is safe."
+      />
       <Link to="/learn" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted hover:text-ink">
         <ArrowLeft size={14} aria-hidden /> Back to Learning Center
       </Link>

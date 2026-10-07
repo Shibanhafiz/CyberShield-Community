@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PageMeta from '../components/PageMeta';
 import { Container } from '../components/ui';
 
 const steps = [
@@ -20,6 +21,10 @@ const topics = [
 export default function Home() {
   return (
     <div>
+      <PageMeta
+        title="Check before you trust"
+        description="CyberShield Community helps you check suspicious messages and links, learn how scams work, and report scam patterns to protect your community."
+      />
       {/* Hero */}
       <section className="border-b border-line bg-surface">
         <Container>
